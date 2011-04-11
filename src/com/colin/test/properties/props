@@ -1,0 +1,5 @@
+# read step seconds
+readStep = 1
+# read service count
+readCount = 2
+writeCount=3

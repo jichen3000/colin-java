@@ -1,0 +1,14 @@
+IBMJava2-SDK-1.4.2
+real	21.654
+user	18.653
+sys	2.324
+
+SUN JDK 1.6.0_04 64bit
+real	14.470
+user	11.881
+sys	1.092
+
+IBM Java 1.6.0
+real	15.622
+user	15.257
+sys	0.784

@@ -1,0 +1,60 @@
+create or replace and compile java source named "BinFileSave" as
+package com.colin.test.bin;
+
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.Date;
+
+public class BinTest {
+  public static String saveBinFile(String filename,oracle.sql.ARRAY p_in) {
+    System.out.println(filename);
+    String[] values = null;
+    try {
+      values = (String[])p_in.getArray();
+    }catch (java.sql.SQLException e){
+      e.printStackTrace();
+    }
+      
+    FileOutputStream out=null;
+    try {
+      out = new FileOutputStream(filename);
+    } catch (FileNotFoundException e) {
+        e.printStackTrace();
+    }
+    for (int i=0; i<values.length; i++){
+      try {
+        out.write(values[i].getBytes());
+      } catch (IOException e) {
+        e.printStackTrace();
+      }
+    }
+    try {
+      out.close();
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+      
+    return "S";
+  }
+}
+
+create or replace function BinFileSave(filename in varchar2, p_in IN STRARRAY) return varchar2
+as language java name
+'com.colin.test.bin.BinTest.saveBinFile(java.lang.String,oracle.sql.ARRAY) return java.lang.String';
+
+
+create type STRARRAY is table of varchar2(1000);
+
+set serveroutput on
+declare 
+v_a  strarray:=strarray('aaa','bbb');
+a  varchar2(100);
+begin
+   a:=binfilesave('/var/oracle/a.log',v_a);
+  -- for i in 1..v_a.count loop
+  --    dbms_output.put_line(v_a(i));
+   --end loop;
+dbms_output.put_line(a);
+end;
+

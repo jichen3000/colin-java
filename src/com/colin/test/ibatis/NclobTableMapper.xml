@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper  
+    PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"  
+    "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">  
+<mapper namespace="com.colin.test.ibatis.NclobTableMapper"> 
+  <resultMap id="MapNclobTable" type="ClobTable"> 
+      <id property="id" column="id" /> 
+      <result property="name" column="name"/> 
+      <result property="text" column="text" typeHandler="org.apache.ibatis.type.NClobTypeHandler"/> 
+  </resultMap>
+  <select id="selectBlog" parameterType="int" resultMap="MapNclobTable">  
+    select * from jc_nclob where id = #{id}  
+  </select>  
+  <select id="selectBlogList" resultMap="MapNclobTable">  
+    select * from jc_nclob order by id desc
+  </select>
+  
+  <insert id="insertBlog" parameterType="ClobTable">
+    <selectKey keyProperty="id" resultType="int" order="BEFORE"> 
+      select jc_seq.nextval from dual 
+    </selectKey> 
+    insert into jc_nclob (id,name,text) values(#{id},#{name},
+#{text,javaType=String,jdbcType=NCLOB,typeHandler=org.apache.ibatis.type.NClobTypeHandler})
+  </insert>
+  
+  <update id="updateBlog" parameterType="ClobTable">
+    update jc_nclob set id=#{id}, name=#{name} where id=#{id}
+  </update>
+  
+  <delete id="deleteBlog" parameterType="ClobTable">
+    delete jc_nclob where id=#{id}
+  </delete>
+    
+</mapper> 

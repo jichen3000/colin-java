@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper  
+    PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"  
+    "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">  
+<mapper namespace="com.colin.test.ibatis.RegisterFileMapper">  
+  <sql id="tableName">
+    MC$DR_REGISTERFILE
+  </sql>
+  <select id="selectNeedMaxs" resultType="RegisterFileModel">  
+    select capture_id,max(id) id
+    from <include refid="tableName"/>  
+    where created='Y' and applied='N' and 1=2
+    group by capture_id
+  </select>  
+      
+  <update id="updateBlog" parameterType="RegisterFileModel">
+    update jc_test set id=#{id}, name=#{name} where id=#{id}
+  </update>
+  
+</mapper> 

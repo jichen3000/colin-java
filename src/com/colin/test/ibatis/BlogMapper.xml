@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper  
+    PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"  
+    "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">  
+<mapper namespace="com.colin.test.ibatis.BlogMapper">  
+  
+  <select id="selectBlog" parameterType="int" resultType="Blog">  
+    select * from jc_test where id = #{id}  
+  </select>  
+  <select id="selectBlogInteger" parameterType="Integer" resultType="Blog">  
+    select * from jc_test where id = #{id}  
+  </select>  
+  <select id="selectBlogList" resultType="Blog">  
+    select * from jc_test order by id desc 
+  </select>
+    
+  <insert id="insertBlog" parameterType="Blog">
+    <selectKey keyProperty="id" resultType="int" order="BEFORE"> 
+      select jc_seq.nextval from dual 
+    </selectKey> 
+    insert into jc_test (id,name) values(#{id},#{name})
+  </insert> 
+  <insert id="insertBlogNoSeq" parameterType="Blog">
+    insert into jc_test (id,name) values(#{id},#{name})
+  </insert> 
+  
+  <update id="updateBlog" parameterType="Blog">
+    update jc_test set id=#{id}, name=#{name} where id=#{id}
+  </update>
+  
+  <delete id="deleteBlog" parameterType="Blog">
+    delete jc_test where id=#{id}
+  </delete>
+  
+  <delete id="deleteBlogById" parameterType="int">
+    delete jc_test where id=#{id}
+  </delete>
+</mapper> 

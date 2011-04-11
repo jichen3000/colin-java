@@ -1,0 +1,24 @@
+DEBUG main - debug (LogTest.java:15)
+  INFO main - info (LogTest.java:16)
+  WARN main - warn (LogTest.java:17)
+  ERROR main - error (LogTest.java:18)
+  INFO main - exit (LogTest.java:19)
+  DEBUG main - doSomething (A.java:5)
+  DEBUG main 10 五月 04 14:41:07,047 - debug (LogTest.java:15)
+   INFO main 10 五月 04 14:41:07,075 - info (LogTest.java:16)
+   WARN main 10 五月 04 14:41:07,076 - warn (LogTest.java:17)
+  ERROR main 10 五月 04 14:41:07,077 - error (LogTest.java:18)
+   INFO main 10 五月 04 14:41:07,077 - exit (LogTest.java:19)
+  DEBUG main 10 五月 04 14:41:07,081 - doSomething (A.java:5)
+  DEBUG main 2010-05-04 14:43:19,219 - debug (LogTest.java:15)
+   INFO main 2010-05-04 14:43:19,223 - info (LogTest.java:16)
+   WARN main 2010-05-04 14:43:19,223 - warn (LogTest.java:17)
+  ERROR main 2010-05-04 14:43:19,224 - error (LogTest.java:18)
+   INFO main 2010-05-04 14:43:19,225 - exit (LogTest.java:19)
+  DEBUG main 2010-05-04 14:43:19,225 - doSomething (A.java:5)
+  INFO main - mm starting ... (LogTest.java:13)
+  mm starting ... 
+  mm starting ... 
+  mm starting ... 
+  mm starting ... 
+  

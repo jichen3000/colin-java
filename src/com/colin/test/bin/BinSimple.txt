@@ -1,0 +1,50 @@
+create or replace and compile java source named "BinSimple" as
+package com.colin.test.bin;
+
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.Date;
+
+public class BinSimple {
+  public static String saveBinSimple(String filename) {
+      
+    FileOutputStream out=null;
+    try {
+      out = new FileOutputStream(filename);
+    } catch (FileNotFoundException e) {
+        e.printStackTrace();
+    }
+    int count = 1000000;
+    String value = "EMPNO,ENAME,JOB,MGR,HIREDATE,SAL,COMM,DEPTNO"+"\n";
+    for (int i=0; i<count; i++){
+      try {
+        out.write(value.getBytes());
+      } catch (IOException e) {
+        e.printStackTrace();
+      }
+    }
+    try {
+      out.close();
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+      
+    return "S";
+  }
+}
+
+create or replace function BinSimple(filename in varchar2) return varchar2
+as language java name
+'com.colin.test.bin.BinSimple.saveBinSimple(java.lang.String) return java.lang.String';
+
+
+
+set serveroutput on
+declare 
+a  varchar2(100);
+begin
+   a:=binfilesave('/var/oracle/a.log');
+dbms_output.put_line(a);
+end;
+
