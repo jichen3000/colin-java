@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="colin-java" basedir="." default="junit">
+	<description>
+		simple test
+  </description>
+
+	<property name="dir" value="agent" />
+	<property name="build-classes.dir" value="bin" />
+	<property name="src" value="src" />
+
+	<target name="junit">
+		<junit>
+			<classpath>
+				<pathelement location="D:/tools/eclipse-3.5/plugins/org.junit4_4.5.0.v20090423/junit.jar" />
+				<pathelement location="${build-classes.dir}" />
+			</classpath>
+			<test name="com.colin.test.junit.TestForAnt" haltonfailure="yes">
+				<formatter type="plain" usefile="false" />
+			</test>
+			<batchtest fork="no">
+				<fileset dir="${build-classes.dir}">
+					<include name="com/colin/test/junit/*Test*.class" />
+				</fileset>
+				<formatter type="plain" usefile="false" />
+			</batchtest>
+
+		</junit>
+	</target>
+</project>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="colin-java"  basedir="." default="mkdir and clear">
+	<description>
+		simple test
+  </description>
+
+	<property name="dir" value="agent" />
+  <target name="mkdir and clear">
+    <mkdir dir="${dir}"/>
+		<delete dir="${dir}" />
+  </target>
+</project>
