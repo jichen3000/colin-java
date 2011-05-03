@@ -1,6 +1,7 @@
 package com.colin.test.time;
 
 import java.util.Date;
+import java.util.GregorianCalendar;
 
 public class TimeTest {
 	public static void main(String[] args) throws InterruptedException {
@@ -11,6 +12,8 @@ public class TimeTest {
 	  System.out.println(end);
 	  // milliseconds 
 	  System.out.println(end.getTime()-start.getTime());
+	  
+	  System.out.println((new GregorianCalendar()).getTime());
 	  
 	  long startMillisec = System.currentTimeMillis();
 	  System.out.println(startMillisec);

@@ -1,13 +1,15 @@
 package com.colin.counttime;
 
+import java.lang.reflect.Method;
+
 public class MethodsTimer {
   private final Method[] methods;
   
-  public Methodstimer(Method[] methods){
+  public MethodsTimer(Method[] methods){
     this.methods = methods;
   }
   
-  pirvate static final int MAXINUM_SIZE = 1000;
+  private static final int MAXINUM_SIZE = 1000;
   
   public void report() throws Exception {
     for (Method each : methods){
