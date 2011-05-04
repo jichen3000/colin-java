@@ -1,0 +1,3 @@
+java -cp /home/usr/classdir:.:/home/usr/mm.jar My.java
+# use ":" split path when you in linux.
+# use ";" split path when you in windows.
