@@ -1,12 +1,12 @@
 package com.colin.test.method;
 
-class Parent{
+class Parent1{
   public static void putsName(){
     System.out.println("parent");
   }
 }
 
-public class StaticMethodInheritance extends Parent{
+public class StaticMethodInheritance extends Parent1{
   
   public static void putsName(){
     System.out.println("sub");

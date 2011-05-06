@@ -40,17 +40,29 @@ class OraConn{
 }
 
 class TestOra{
+	// show how to close some resource with finally and exception
 	public static void testConn(){
 		try {
-			Statement stat = OraConn.getConn().createStatement();
-			ResultSet rs = stat.executeQuery("select * from tab where rownum < 10");
-			int rowCount = 0;
-			while(rs.next()){
-				System.out.println(rs.getString("TNAME")+"\t"+rs.getString(1));
-				rowCount++;
-			}
-			System.out.println("¹²ÓÐ"+rowCount+"ÐÐÊý¾Ý");
-			stat.close();
+			Statement stat = null;
+			try {
+				stat = OraConn.getConn().createStatement();
+				ResultSet rs = null;
+				try {
+					rs = stat.executeQuery("select * from tab where rownum < 10");
+					int rowCount = 0;
+					while(rs.next()){
+						System.out.println(rs.getString("TNAME")+"\t"+rs.getString(1));
+						rowCount++;
+					}
+					System.out.println("rowCount:"+rowCount);
+				} finally {
+					if (rs!=null)
+						rs.close();
+				}
+      } finally {
+				if (stat!=null)
+	  			stat.close();
+      }
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -80,7 +92,7 @@ class TestOra{
 			e.printStackTrace();
 		}
 	}
-	// ×¢ÒâbatchÊ±£¬Ö»ÄÜÊ¹ÓÃÍ¬ÀàÐÍµÄÓï¾ä£¬±ÈÈç¶¼ÊÇinsertµÄ£¬»ò¶¼ÊÇupdateµÄ¡£
+	// ×¢ï¿½ï¿½batchÊ±ï¿½ï¿½Ö»ï¿½ï¿½Ê¹ï¿½ï¿½Í¬ï¿½ï¿½ï¿½Íµï¿½ï¿½ï¿½ä£¬ï¿½ï¿½ï¿½ç¶¼ï¿½ï¿½insertï¿½Ä£ï¿½ï¿½ï¿½ï¿½ï¿½updateï¿½Ä¡ï¿½
 	public static void testBatchInsert(){
 		try {
 			String sql = "insert into jc_test (id,name) values (:id,\':name\')";
@@ -166,10 +178,10 @@ class TestOra{
 	}
 	public static void writeBlob(String filename){
 		try {
-			// È¡ÏûConnection¶ÔÏóµÄauto commitÊôÐÔ
+			// È¡ï¿½ï¿½Connectionï¿½ï¿½ï¿½ï¿½ï¿½auto commitï¿½ï¿½ï¿½ï¿½
 			OraConn.getConn().setAutoCommit(false);
 			Statement stat = OraConn.getConn().createStatement();
-			// ±ØÐëÏÈÉèÖÃÒ»ÏÂ£¬·ñÔòblob.getBinaryOutputStream()
+			// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½Â£ï¿½ï¿½ï¿½ï¿½ï¿½blob.getBinaryOutputStream()
 			stat.executeUpdate("update jc_test set memo=EMPTY_BLOB() where id=0");
 			
 			
@@ -178,7 +190,7 @@ class TestOra{
 			rs.next();
 			BLOB blob = ((OracleResultSet)rs).getBLOB("memo");
 			OutputStream outs = blob.getBinaryOutputStream();
-			//ÒªÏÈ´ÓÎÄ¼þÖÐ¶Á½øÀ´ÔÙÐ´¡£
+			//Òªï¿½È´ï¿½ï¿½Ä¼ï¿½ï¿½Ð¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð´ï¿½ï¿½
 			InputStream ins = new FileInputStream(filename);
 			
 			byte[] buffer = new byte[blob.getBufferSize()];
