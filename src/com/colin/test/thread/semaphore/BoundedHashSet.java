@@ -6,6 +6,9 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.Collections;
 
+/*
+ * It is an example for Semaphore
+ */
 public class BoundedHashSet<T> {
   private final Set<T> set;
   private final Semaphore semaphore;
